@@ -1,16 +1,6 @@
 
 #include "vector3.h"
 
-t_vec3	vec3(double x, double y, double z)
-{
-	t_vec3	v;
-
-	v.x = x;
-	v.y = y;
-	v.z = z;
-	return (v);
-}
-
 t_vec3	v3_add(t_vec3 u, t_vec3 v)
 {
 	return (vec3(u.x + v.x, u.y + v.y, u.z + v.z));

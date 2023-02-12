@@ -19,21 +19,22 @@ t_pt3	ray_at(t_ray *ray, double t)
 	return ((t_pt3)v3_add(ray->origin, v3_mul(ray->dir, t)));
 }
 
-t_color	ray_color(t_ray *ray, t_obj_arr *world)
+t_color	ray_color(t_ray *r, t_obj_arr *world, int depth)
 {
 	t_hit_record	record;
+	t_ray			next_ray;
 	t_vec3			unit_dir;
 	double			t;
 
-	if (object_array_hit(world, ray, &record, 0, INFINITY) == TRUE)
+	if (depth <= 0)
+		return (color3(0, 0, 0));
+	if (object_array_hit(world, r, &record, 0.001, INFINITY) == TRUE)
 	{
-// dprintf(2, ">> SUCCESS <<\n");
-// dprintf(2, "normal vector: %lf %lf %lf\n", \//
-// record.normal.x, record.normal.y, record.normal.z);
-		return (v3_mul(v3_add(record.normal, color3(1, 1, 1)), 0.5));
+		next_ray = ray(record.p, v3_add(record.normal, random_pt()));
+		return (v3_mul(ray_color(&next_ray, world, depth - 1), 0.5));
 	}
-	unit_dir = v3_unit(ray->dir);
+	unit_dir = v3_unit(r->dir);
 	t = 0.5 * (unit_dir.y + 1);
 	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t),\
-	 		v3_mul(color3(0.5, 0.7, 1.0), t)));
+	 				v3_mul(color3(0.5, 0.7, 1.0), t)));
 }

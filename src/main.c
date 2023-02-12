@@ -47,7 +47,6 @@ int	main()
 	printf("P3\n");
 	printf("%d %d\n", image.width, image.height);
 	printf("255\n");
-
 	for (j = image.height - 1 ; j >= 0 ; --j)
 	{
 		dprintf(2, "Scanlines remaining: %d\n", j);
@@ -59,7 +58,8 @@ int	main()
 				u = (double)(i + random_double()) / (image.width - 1);
 				v =	(double)(j + random_double()) / (image.height - 1);
 				r = get_cam_ray(&camera, u, v);
-				pixel_color = v3_add(pixel_color, ray_color(&r, &world));
+				pixel_color = v3_add(\
+							pixel_color, ray_color(&r, &world, MAX_DEPTH));
 			}
 			write_color(pixel_color, SAMPLES_PER_PIXEL);
 		}

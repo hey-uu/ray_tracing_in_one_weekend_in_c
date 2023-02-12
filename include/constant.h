@@ -3,10 +3,10 @@
 
 # include <limits.h>
 
-# define T_MIN 0
-# define T_INFINITY INT_MAX
-# define SAMPLES_PER_PIXEL 100
-
+# define T_MIN				0
+# define T_INFINITY 		INT_MAX
+# define SAMPLES_PER_PIXEL	100
+# define MAX_DEPTH			50
 enum e_bool
 {
 	FALSE,
