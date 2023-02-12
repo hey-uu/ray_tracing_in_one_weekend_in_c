@@ -6,6 +6,7 @@
 
 /** FUNCTION **/
 t_color	color3(double r, double g, double b);
-void	write_color(t_color pixel_color);
+void	write_color(t_color pixel_color, int samples_per_pixel);
+
 
 #endif

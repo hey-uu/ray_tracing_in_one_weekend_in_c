@@ -17,7 +17,9 @@ ARFLAGS					=		crs
 
 # remove
 RM						=		rm
-RMFLAGS					=		-rf
+RMFLAG1					=		-f
+RMFLAG2					=		-r
+
 
 # ********************************* library ********************************** #
 
@@ -51,6 +53,7 @@ SRC_PATH				=		$(SRC_DIR)
 FILE					=		camera\
 								color_util\
 								discriminant\
+								image\
 								main\
 								ray\
 								sphere\

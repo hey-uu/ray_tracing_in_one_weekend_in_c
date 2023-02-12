@@ -18,11 +18,11 @@ include config/rules.mk
 
 .PHONY : clean fclean re
 clean :
-	$(RM) $(RMFLAGS) $(OBJ_PATH)
+	$(RM) $(RMFLAG1) $(RMFLAG2) $(OBJ_PATH)
 
 fclean : clean
-	$(RM) $(RMFLAGS) $(RESULT_DIR)/error_log
-	$(RM) $(NAME)
+	$(RM) $(RMFLAG1) $(RESULT_DIR)/error_log
+	$(RM) $(RMFLAG1) $(NAME)
 
 re :
 	make fclean

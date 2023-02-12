@@ -1,6 +1,7 @@
 camera\
 								color_util\
 								discriminant\
+								image\
 								main\
 								ray\
 								sphere\

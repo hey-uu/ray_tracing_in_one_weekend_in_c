@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include "color.h"
+#include "utils.h"
 
 t_color	color3(double r, double g, double b)
 {
@@ -12,9 +13,12 @@ t_color	color3(double r, double g, double b)
 	return (color);
 }
 
-void	write_color(t_color	pixel_color)
+void	write_color(t_color pixel_color, int samples_per_pixel)
 {
-	t_color	color = v3_mul(pixel_color, 255.999);
+	const double	scale = 1.0 / samples_per_pixel;
 
-	printf("%d %d %d\n", (int)color.x, (int)color.y, (int)color.z);
+	pixel_color = v3_mul(pixel_color, scale);
+	printf("%d %d %d\n", (int)(256 * clamp(pixel_color.x, 0.0, 0.999)), \
+						(int)(256 * clamp(pixel_color.y, 0.0, 0.999)), \
+						(int)(256 * clamp(pixel_color.z, 0.0, 0.999)));
 }
