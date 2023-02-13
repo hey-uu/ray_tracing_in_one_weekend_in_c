@@ -52,11 +52,12 @@ t_color	sphere_color(t_sphere *s, t_ray *r)
 	}
 	unit_dir = v3_unit(r->dir);
 	t = 0.5 * (unit_dir.y + 1);
-	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t),\
-	 		v3_mul(color3(0.5, 0.7, 1.0), t)));
+	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t), \
+			v3_mul(color3(0.5, 0.7, 1.0), t)));
 }
 
-void	sphere_set_face_normal(t_hit_record *record, t_ray *r, t_vec3 outward_normal)
+void	sphere_set_face_normal(\
+		t_hit_record *record, t_ray *r, t_vec3 outward_normal)
 {
 	record->front_face = (v3_dot(r->dir, outward_normal) < 0);
 	if (record->front_face > 0)

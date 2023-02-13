@@ -105,13 +105,13 @@ t_bool	object_hit(\
 	}
 	else
 	{
-
 	}
 	return (res);
 }
 
 t_bool	object_array_hit(\
-		t_obj_arr *arr, t_ray *r, t_hit_record *record, double t_min, double t_max)
+		t_obj_arr *arr, t_ray *r, t_hit_record *record, \
+		double t_min, double t_max)
 {
 	t_bool			hit_anything;
 	t_hit_record	temp_record;
@@ -126,7 +126,7 @@ t_bool	object_array_hit(\
 		{
 			hit_anything = TRUE;
 			closest_so_far = temp_record.t;
-			*record = temp_record; 
+			*record = temp_record;
 		}
 		arr->iter++;
 	}

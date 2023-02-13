@@ -26,18 +26,16 @@ int	xorshift(void)
 	seed ^= seed << 13;
 	seed ^= seed >> 17;
 	seed ^= seed << 5;
-
 	if (seed < 0)
 		return (~seed + 1);
 	else
 		return (seed);	
 }
 
-#include <stdio.h>
 // Returns a random real in [0, 1)
 double	random_double(void)
 {
-	return (xorshift()/(INT_MAX + 1.0));
+	return (xorshift() / (INT_MAX + 1.0));
 }
 
 // Returns a random real in [min, max)

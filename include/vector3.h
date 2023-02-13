@@ -27,6 +27,9 @@ t_vec3	v3_cross_product(t_vec3 u, t_vec3 v);
 
 // point
 t_pt3	point3(double x, double y, double z);
-t_pt3	random_pt(void);
+
+// random vector
+t_vec3	random_vec3_in_unit_sphere(void);
+t_vec3	random_unit_vec3(void);
 
 #endif

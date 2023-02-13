@@ -30,11 +30,11 @@ t_color	ray_color(t_ray *r, t_obj_arr *world, int depth)
 		return (color3(0, 0, 0));
 	if (object_array_hit(world, r, &record, 0.001, INFINITY) == TRUE)
 	{
-		next_ray = ray(record.p, v3_add(record.normal, random_pt()));
+		next_ray = ray(record.p, v3_add(record.normal, random_unit_vec3()));
 		return (v3_mul(ray_color(&next_ray, world, depth - 1), 0.5));
 	}
 	unit_dir = v3_unit(r->dir);
 	t = 0.5 * (unit_dir.y + 1);
-	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t),\
-	 				v3_mul(color3(0.5, 0.7, 1.0), t)));
+	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t), \
+					v3_mul(color3(0.5, 0.7, 1.0), t)));
 }

@@ -19,15 +19,10 @@ t_vec3	random_vec3(double min, double max)
 				random_double_interval(min, max)));
 }
 
-t_pt3	point3(double x, double y, double z)
+// random vector in unit sphere
+t_vec3	random_vec3_in_unit_sphere(void)
 {
-	return ((t_pt3)vec3(x, y, z));
-}
-
-// random point in unit sphere
-t_pt3	random_pt(void)
-{
-	t_pt3	random_point;
+	t_vec3	random_point;
 
 	while (1)
 	{
@@ -36,4 +31,14 @@ t_pt3	random_pt(void)
 			continue ;
 		return (random_point);
 	}
+}
+
+t_vec3	random_unit_vec3(void)
+{
+	return (v3_unit(random_vec3_in_unit_sphere()));
+}
+
+t_pt3	point3(double x, double y, double z)
+{
+	return ((t_pt3)vec3(x, y, z));
 }
