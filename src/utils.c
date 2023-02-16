@@ -29,7 +29,7 @@ int	xorshift(void)
 	if (seed < 0)
 		return (~seed + 1);
 	else
-		return (seed);	
+		return (seed);
 }
 
 // Returns a random real in [0, 1)

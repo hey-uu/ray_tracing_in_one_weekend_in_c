@@ -3,9 +3,10 @@
 #include "vector3.h"
 #include "color.h"
 #include "world.h"
+#include "material.h"
 #include <stdio.h>
 
-t_ray	ray(t_pt3 origin, t_vec3 dir)
+t_ray	get_ray(t_point origin, t_vector dir)
 {
 	t_ray	ray;
 
@@ -14,27 +15,26 @@ t_ray	ray(t_pt3 origin, t_vec3 dir)
 	return (ray);
 }
 
-t_pt3	ray_at(t_ray *ray, double t)
+t_point	ray_at(t_ray *ray, double t)
 {
-	return ((t_pt3)v3_add(ray->origin, v3_mul(ray->dir, t)));
+	return ((t_point)v_add(ray->origin, v_mul(ray->dir, t)));
 }
 
-t_color	ray_color(t_ray *r, t_obj_arr *world, int depth)
+t_color	ray_color(t_ray *ray, t_object_array *world, int depth)
 {
 	t_hit_record	record;
-	t_ray			next_ray;
-	t_vec3			unit_dir;
-	double			t;
+	t_ray			scattered;
+	t_color			attenuation;
 
 	if (depth <= 0)
-		return (color3(0, 0, 0));
-	if (object_array_hit(world, r, &record, 0.001, INFINITY) == TRUE)
+		return (get_color(0, 0, 0));
+	if (object_array_hit(world, ray, &record, T_MINIMUM, INFINITY) == TRUE)
 	{
-		next_ray = ray(record.p, v3_add(record.normal, random_unit_vec3()));
-		return (v3_mul(ray_color(&next_ray, world, depth - 1), 0.5));
+		if (scatter(ray, &record, &attenuation, &scattered) == FALSE)
+			return (get_color(0, 0, 0));
+		return (v_componentwise_product(\
+				ray_color(&scattered, world, depth - 1), \
+				attenuation));
 	}
-	unit_dir = v3_unit(r->dir);
-	t = 0.5 * (unit_dir.y + 1);
-	return (v3_add(v3_mul(color3(1.0, 1.0, 1.0), 1 - t), \
-					v3_mul(color3(0.5, 0.7, 1.0), t)));
+	return (background_color(ray));
 }

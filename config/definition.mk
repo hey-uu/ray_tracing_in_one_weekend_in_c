@@ -55,11 +55,13 @@ FILE					=		camera\
 								discriminant\
 								image\
 								main\
+								material\
 								ray\
+								scatter\
 								sphere\
 								utils\
-								vec3_operator\
-								vec3_util\
+								vector_operator\
+								vector_util\
 								world
 
 

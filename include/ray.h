@@ -7,9 +7,8 @@
 # include "s_ray.h"
 
 /** FUNCTION **/
-t_ray	ray(t_pt3 origin, t_vec3 dir);
-t_pt3	ray_at(t_ray *ray, double t);
-t_color	ray_color(t_ray *r, t_obj_arr *world, int depth);
-
+t_ray	get_ray(t_point origin, t_vector dir);
+t_point	ray_at(t_ray *ray, double t);
+t_color	ray_color(t_ray *r, t_object_array *world, int depth);
 
 #endif

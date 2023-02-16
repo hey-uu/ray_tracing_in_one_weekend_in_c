@@ -6,14 +6,14 @@
 
 typedef struct s_camera
 {
-	double	aspect_ratio;
-	double	viewport_height;
-	double	viewport_width;
-	double	focal_length;
-	t_pt3	origin;
-	t_vec3	horizontal;
-	t_vec3	vertical;
-	t_pt3	lower_left_corner;
+	double		aspect_ratio;
+	double		viewport_height;
+	double		viewport_width;
+	double		focal_length;
+	t_point		origin;
+	t_vector	horizontal;
+	t_vector	vertical;
+	t_point		lower_left_corner;
 }	t_camera;
 
 #endif

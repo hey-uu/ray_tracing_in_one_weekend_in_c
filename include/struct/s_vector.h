@@ -2,7 +2,7 @@
 # define S_VECTOR_H
 
 /** STRUCTURE **/
-struct s_vec3
+struct s_vector
 {
 	double	x;
 	double	y;
@@ -10,8 +10,8 @@ struct s_vec3
 };
 
 /** TYPE DEFINE **/
-typedef struct s_vec3	t_vec3;
-typedef t_vec3			t_pt3;
-typedef t_vec3			t_color;
+typedef struct s_vector	t_vector;
+typedef t_vector		t_point;
+typedef t_vector		t_color;
 
 #endif

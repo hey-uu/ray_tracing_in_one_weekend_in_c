@@ -3,14 +3,15 @@
 
 # include "s_vector.h"
 # include "constant.h"
+# include "s_material.h"
 
 typedef struct s_hit_record
 {
-	t_pt3	p;
-	t_vec3	normal;
-	double	t;
-	t_bool	front_face;
+	t_point		p;
+	t_vector	normal;
+	double		t;
+	t_material	*material;
+	t_bool		front_face;
 }	t_hit_record;
-
 
 #endif

@@ -6,9 +6,9 @@
 
 typedef struct s_sphere
 {
-	t_pt3			center;
-	double			radius;
+	t_point		center;
+	double		radius;
+	t_material	material;
 }	t_sphere;
-
 
 #endif
