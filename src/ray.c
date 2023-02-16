@@ -1,4 +1,3 @@
-
 #include "ray.h"
 #include "vector3.h"
 #include "color.h"

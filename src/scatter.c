@@ -41,18 +41,15 @@ t_bool	scatter(\
 {
 	if (record->material->type == LAMBERTIAN)
 	{
-		// dprintf(2, "LAMBERTIAN\n");
 		return (lambertian_scatter(record, attenuation, scattered));
 	}
 	else if (record->material->type == METAL)
 	{
-		// dprintf(2, "METAL\n");
 		return (metal_scatter(ray, record, attenuation, scattered));
 	}
 	else if (record->material->type == DIELECTRIC)
 	{
 		return (dielectric_scatter());
 	}
-	// dprintf(2, "SCATTER FAILURE\n");
 	return (FALSE);
 }
