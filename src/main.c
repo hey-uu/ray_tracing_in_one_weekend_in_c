@@ -42,8 +42,8 @@ int	main()
 	// add objects
 	m[0] = get_material(LAMBERTIAN, &(t_lambertian){get_color(0.8, 0.8, 0)});
 	m[1] = get_material(LAMBERTIAN, &(t_lambertian){get_color(0.7, 0.3, 0.3)});
-	m[2] = get_material(METAL, &(t_metal){get_color(0.8, 0.8, 0.8), 0});
-	m[3] = get_material(METAL, &(t_metal){get_color(0.8, 0.6, 0.2), 0});
+	m[2] = get_material(METAL, &(t_metal){get_color(0.8, 0.8, 0.8), 0.3});
+	m[3] = get_material(METAL, &(t_metal){get_color(0.8, 0.6, 0.2), 1.0});
 	s = get_sphere(get_point(0, -100.5, -1), 100, m[0]);
 	object_add(&world, &s, OBJ_SPHERE);
 	s = get_sphere(get_point(0, 0, -1), 0.5, m[1]);
