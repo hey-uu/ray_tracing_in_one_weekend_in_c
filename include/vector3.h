@@ -15,6 +15,7 @@
 t_vector	get_vector(double x, double y, double z);
 t_point		get_point(double x, double y, double z);
 t_vector	get_reflect_vector(t_vector v, t_vector n);
+t_vector	get_refract_vector(t_vector i, t_vector n, double r_idx_ratio);
 
 // vector operator
 t_vector	v_add(t_vector u, t_vector v);
@@ -31,7 +32,7 @@ t_vector	v_componentwise_product(t_vector u, t_vector v);
 
 // random vector
 t_vector	random_vector(double min, double max);
-t_vector	random_vector_in_unit_sphere(void);
-t_vector	random_unit_vector(void);
+t_vector	random_in_unit_sphere(void);
+t_vector	random_on_unit_sphere(void);
 
 #endif

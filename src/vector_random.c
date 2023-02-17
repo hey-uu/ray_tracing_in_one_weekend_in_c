@@ -8,7 +8,7 @@ t_vector	random_vector(double min, double max)
 				random_double_interval(min, max)));
 }
 
-t_vector	random_vector_in_unit_sphere(void)
+t_vector	random_in_unit_sphere(void)
 {
 	t_vector	random_point;
 
@@ -21,7 +21,7 @@ t_vector	random_vector_in_unit_sphere(void)
 	}
 }
 
-t_vector	random_unit_vector(void)
+t_vector	random_on_unit_sphere(void)
 {
-	return (get_unit_vector(random_vector_in_unit_sphere()));
+	return (get_unit_vector(random_in_unit_sphere()));
 }

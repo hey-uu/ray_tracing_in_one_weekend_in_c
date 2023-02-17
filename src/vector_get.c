@@ -15,11 +15,6 @@ t_point	get_point(double x, double y, double z)
 	return ((t_point)get_vector(x, y, z));
 }
 
-t_vector	get_reflect_vector(t_vector v, t_vector n)
-{
-	return (v_subtract(v, v_mul(n, 2 * v_dot_product(v, n))));
-}
-
 t_vector	get_unit_vector(t_vector v)
 {
 	return (v_div(v, v_len(v)));

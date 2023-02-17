@@ -1,7 +1,7 @@
-#include <stdio.h>
 #include "color.h"
 #include "utils.h"
 #include "s_ray.h"
+#include <stdio.h>
 
 t_color	get_color(double r, double g, double b)
 {

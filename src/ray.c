@@ -32,8 +32,7 @@ t_color	ray_color(t_ray *ray, t_object_array *world, int depth)
 		if (scatter(ray, &record, &attenuation, &scattered) == FALSE)
 			return (get_color(0, 0, 0));
 		return (v_componentwise_product(\
-				ray_color(&scattered, world, depth - 1), \
-				attenuation));
+				ray_color(&scattered, world, depth - 1), attenuation));
 	}
 	return (background_color(ray));
 }

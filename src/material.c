@@ -1,5 +1,6 @@
 #include "s_material.h"
 #include <stdio.h>
+
 t_material	get_material(t_material_type type, void	*consts)
 {
 	t_material	material;

@@ -1,4 +1,3 @@
-
 #include "sphere.h"
 #include "vector3.h"
 #include "discriminant.h"
@@ -17,7 +16,8 @@ t_sphere	get_sphere(t_point center, double radius, t_material material)
 }
 
 t_bool	sphere_hit(\
-		t_sphere *s, t_ray *r, t_hit_record *record, double t_min, double t_max)
+		t_sphere *s, t_ray *r, t_hit_record *record,\
+		double t_min, double t_max)
 {
 	const t_vector	oc = v_subtract(r->origin, s->center);
 	const t_discr	d = get_discriminant(v_len_sqr(r->dir), \

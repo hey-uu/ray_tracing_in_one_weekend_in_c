@@ -58,6 +58,7 @@ FILE					=		camera\
 								material\
 								ray\
 								scatter\
+								scattered_vector\
 								sphere\
 								utils\
 								vector_basic\
