@@ -60,8 +60,11 @@ FILE					=		camera\
 								scatter\
 								sphere\
 								utils\
-								vector_operator\
-								vector_util\
+								vector_basic\
+								vector_get\
+								vector_length\
+								vector_product\
+								vector_random\
 								world
 
 

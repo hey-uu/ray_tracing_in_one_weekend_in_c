@@ -28,7 +28,7 @@ void	write_color(t_color pixel_color, int samples_per_pixel)
 
 t_color	background_color(t_ray *ray)
 {
-	const t_vector	unit_dir = v_unit(ray->dir);
+	const t_vector	unit_dir = get_unit_vector(ray->dir);
 	const double	t = 0.5 * (unit_dir.y + 1);
 
 	return (v_add(v_mul(get_color(1, 1, 1), 1 - t), \

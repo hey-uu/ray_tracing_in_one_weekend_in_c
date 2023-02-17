@@ -27,7 +27,7 @@ static t_bool	metal_scatter(\
 						v_mul(random_vector_in_unit_sphere(), \
 						record->material->constants.metal.fuzz)));
 	*attenuation = record->material->constants.metal.albedo;
-	return (v_dot(scattered->dir, record->normal) > 0);
+	return (v_dot_product(scattered->dir, record->normal) > 0);
 }
 
 static t_bool	dielectric_scatter()

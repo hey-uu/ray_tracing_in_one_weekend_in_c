@@ -21,7 +21,7 @@ t_bool	sphere_hit(\
 {
 	const t_vector	oc = v_subtract(r->origin, s->center);
 	const t_discr	d = get_discriminant(v_len_sqr(r->dir), \
-										v_dot(oc, r->dir), \
+										v_dot_product(oc, r->dir), \
 										v_len_sqr(oc) - s->radius * s->radius);
 	double			root;
 
@@ -45,7 +45,7 @@ t_bool	sphere_hit(\
 void	sphere_set_face_normal(\
 		t_hit_record *record, t_ray *r, t_vector outward_normal)
 {
-	record->front_face = (v_dot(r->dir, outward_normal) < 0);
+	record->front_face = (v_dot_product(r->dir, outward_normal) < 0);
 	if (record->front_face > 0)
 	{
 		record->normal = outward_normal;
