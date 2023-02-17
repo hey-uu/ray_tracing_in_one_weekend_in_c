@@ -31,6 +31,8 @@ void	add_objects(t_object_array *world)
 	object_add(world, &s, OBJ_SPHERE);
 	s = get_sphere(get_point(-1, 0, -1), 0.5, m[2]);
 	object_add(world, &s, OBJ_SPHERE);
+	s = get_sphere(get_point(-1, 0, -1), -0.4, m[2]);
+	object_add(world, &s, OBJ_SPHERE);
 	s = get_sphere(get_point(1, 0, -1), 0.5, m[3]);
 	object_add(world, &s, OBJ_SPHERE);
 }
