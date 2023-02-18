@@ -6,35 +6,39 @@
 
 t_ray	get_cam_ray(t_camera *cam, double u, double v)
 {
-	t_vector	dir;
+	const t_vector	random_dist = v_mul(random_in_unit_disk(), cam->lens_radius);
+	const t_vector	offset = v_add(v_mul(cam->base.side, random_dist.x), \
+									v_mul(cam->base.up, random_dist.y));
+	const t_vector	dir = v_subtract(v_add(v_add(cam->focus.lower_left_corner, \
+							v_mul(cam->focus.horizontal, u)), \
+							v_mul(cam->focus.vertical, v)), \
+							v_add(cam->origin, offset));
 
-	dir = v_subtract(v_add(v_add(\
-			cam->viewport.lower_left_corner, \
-			v_mul(cam->viewport.horizontal, u)), \
-			v_mul(cam->viewport.vertical, v)), \
-			cam->origin);
-	return (get_ray(cam->origin, dir));
+	return (get_ray(v_add(cam->origin, offset), dir));
 }
 
-static void	init_viewport_vectors(t_camera *cam)
+void	init_focus_plane(\
+		t_focus_plane *focus, t_cam_base *base, \
+		t_viewport *viewport, t_point *origin)
 {
-	cam->viewport.horizontal = v_mul(cam->base.side, cam->viewport.width);
-	cam->viewport.vertical = v_mul(cam->base.up, cam->viewport.height);
-	cam->viewport.lower_left_corner = v_subtract(v_subtract(v_subtract(\
-							cam->origin, \
-							v_div(cam->viewport.horizontal, 2)), \
-							v_div(cam->viewport.vertical, 2)), \
-							cam->base.dir);
+	focus->horizontal = v_mul(base->side, focus->dist * viewport->width);
+	focus->vertical = v_mul(base->up, focus->dist * viewport->height);
+	focus->lower_left_corner = v_subtract(v_subtract(\
+								v_subtract(*origin, \
+								v_div(focus->horizontal, 2)),
+								v_div(focus->vertical, 2)), \
+								v_mul(base->dir, focus->dist));	
 }
 
-void	init_camera(t_camera *cam, t_point look_from, t_point look_at)
+void	init_camera(\
+		t_camera *cam, t_point look_from, t_point look_at, double aperture)
 {
 	cam->origin = look_from;
 	cam->look_at = look_at;
 	cam->base.dir = get_unit_vector(v_subtract(look_from, look_at));
 	cam->base.side = get_unit_vector(v_cross_product(UP_VECTOR, cam->base.dir));
 	cam->base.up = v_cross_product(cam->base.dir, cam->base.side);
-	init_viewport_vectors(cam);
+	cam->lens_radius = aperture / 2;
 }
 
 void	init_viewport(\

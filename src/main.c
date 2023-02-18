@@ -87,7 +87,10 @@ int	main(void)
 
 	init_image(&info.image, IMG_WIDTH, IMG_ASPECT_RATIO);
 	init_viewport(&info.camera.viewport, &info.image, FIELD_OF_VIEW);
-	init_camera(&info.camera, LOOK_FROM, LOOK_AT);
+	init_camera(&info.camera, LOOK_FROM, LOOK_AT, 2);
+	init_focus_plane(\
+	&info.camera.focus, &info.camera.base, \
+	&info.camera.viewport, &info.camera.origin);
 	init_object_array(&info.world, 10);
 	add_objects(&info.world);
 	do_rendering(&info);

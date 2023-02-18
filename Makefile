@@ -36,4 +36,3 @@ img :
 	make all
 	mkdir -p $(RESULT_DIR)
 	sh script/get_img_log.sh
-	

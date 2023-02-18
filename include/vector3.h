@@ -34,5 +34,5 @@ t_vector	v_componentwise_product(t_vector u, t_vector v);
 t_vector	random_vector(double min, double max);
 t_vector	random_in_unit_sphere(void);
 t_vector	random_on_unit_sphere(void);
-
+t_vector	random_in_unit_disk(void);
 #endif
