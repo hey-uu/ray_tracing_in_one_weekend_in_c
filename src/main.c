@@ -9,32 +9,31 @@
 #include "material.h"
 #include <stdio.h>
 
-void	init_settings(t_info *info)
-{
-	init_image(&info->image);
-	init_camera(&info->camera);
-	init_object_array(&info->world, 10);
-}
-
 void	add_objects(t_object_array *world)
 {
-	t_sphere	s;
-	t_material	m[4];
+	t_sphere	obj[MATERIAL_NUMBER];
+	t_material	m[OBJECT_NUMBER];
+	int			i;
 
+	// materials
 	m[0] = get_material(LAMBERTIAN, &(t_lambertian){get_color(0.8, 0.8, 0)});
 	m[1] = get_material(LAMBERTIAN, &(t_lambertian){get_color(0.1, 0.2, 0.5)});
 	m[2] = get_material(DIELECTRIC, &(t_dielectric){1.5});
 	m[3] = get_material(METAL, &(t_metal){get_color(0.8, 0.6, 0.2), 0.0});
-	s = get_sphere(get_point(0, -100.5, -1), 100, m[0]);
-	object_add(world, &s, OBJ_SPHERE);
-	s = get_sphere(get_point(0, 0, -1), 0.5, m[1]);
-	object_add(world, &s, OBJ_SPHERE);
-	s = get_sphere(get_point(-1, 0, -1), 0.5, m[2]);
-	object_add(world, &s, OBJ_SPHERE);
-	s = get_sphere(get_point(-1, 0, -1), -0.4, m[2]);
-	object_add(world, &s, OBJ_SPHERE);
-	s = get_sphere(get_point(1, 0, -1), 0.5, m[3]);
-	object_add(world, &s, OBJ_SPHERE);
+	// objects
+	obj[0] = get_sphere(get_point(0, -100.5, -1), 100, m[0]);
+	obj[1] = get_sphere(get_point(0, 0, -1), 0.5, m[1]);
+	obj[2] = get_sphere(get_point(-1, 0, -1), 0.5, m[2]);
+	obj[3] = get_sphere(get_point(-1, 0, -1), -0.45, m[2]);
+	obj[4] = get_sphere(get_point(1, 0, -1), 0.5, m[3]);
+	// add objects to object array
+	i = 0;
+	while (i < OBJECT_NUMBER)
+	{
+		object_add(world, &obj[i], OBJ_SPHERE);
+		i++;
+	}
+
 }
 
 t_color	get_pixel_color(t_info *info, int i, int j)
@@ -86,7 +85,10 @@ int	main(void)
 {
 	t_info	info;
 
-	init_settings(&info);
+	init_image(&info.image, IMG_WIDTH, IMG_ASPECT_RATIO);
+	init_viewport(&info.camera.viewport, &info.image, FIELD_OF_VIEW);
+	init_camera(&info.camera, LOOK_FROM, LOOK_AT);
+	init_object_array(&info.world, 10);
 	add_objects(&info.world);
 	do_rendering(&info);
 }

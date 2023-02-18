@@ -3,6 +3,6 @@
 
 # include "s_image.h"
 
-void	init_image(t_image *img);
+void	init_image(t_image *img, int width, double aspect_ratio);
 
 #endif

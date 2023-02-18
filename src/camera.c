@@ -1,36 +1,47 @@
 #include "camera.h"
 #include "vector3.h"
 #include "ray.h"
+#include "s_image.h"
+#include "utils.h"
 
 t_ray	get_cam_ray(t_camera *cam, double u, double v)
 {
 	t_vector	dir;
 
 	dir = v_subtract(v_add(v_add(\
-			cam->lower_left_corner, \
-			v_mul(cam->horizontal, u)), \
-			v_mul(cam->vertical, v)), \
+			cam->viewport.lower_left_corner, \
+			v_mul(cam->viewport.horizontal, u)), \
+			v_mul(cam->viewport.vertical, v)), \
 			cam->origin);
 	return (get_ray(cam->origin, dir));
 }
 
-void	set_camera_location(t_camera *cam, t_point origin)
+static void	init_viewport_vectors(t_camera *cam)
 {
-	cam->origin = origin;
-	cam->horizontal = v_add(origin, get_vector(cam->viewport_width, 0.0, 0.0));
-	cam->vertical = v_add(origin, get_vector(0.0, cam->viewport_height, 0.0));
-	cam->lower_left_corner = v_subtract(v_subtract(v_subtract(\
-							origin, \
-							v_div(cam->horizontal, 2)), \
-							v_div(cam->vertical, 2)), \
-							get_vector(0, 0, cam->focal_length));
+	cam->viewport.horizontal = v_mul(cam->base.side, cam->viewport.width);
+	cam->viewport.vertical = v_mul(cam->base.up, cam->viewport.height);
+	cam->viewport.lower_left_corner = v_subtract(v_subtract(v_subtract(\
+							cam->origin, \
+							v_div(cam->viewport.horizontal, 2)), \
+							v_div(cam->viewport.vertical, 2)), \
+							cam->base.dir);
 }
 
-void	init_camera(t_camera *cam)
+void	init_camera(t_camera *cam, t_point look_from, t_point look_at)
 {
-	cam->aspect_ratio = 16.0 / 9.0;
-	cam->viewport_height = 2.0;
-	cam->viewport_width = cam->aspect_ratio * cam->viewport_height;
-	cam->focal_length = 1.0;
-	set_camera_location(cam, get_point(0.0, 0.0, 0.0));
+	cam->origin = look_from;
+	cam->look_at = look_at;
+	cam->base.dir = get_unit_vector(v_subtract(look_from, look_at));
+	cam->base.side = get_unit_vector(v_cross_product(UP_VECTOR, cam->base.dir));
+	cam->base.up = v_cross_product(cam->base.dir, cam->base.side);
+	init_viewport_vectors(cam);
+}
+
+void	init_viewport(\
+		t_viewport *viewport, t_image *image, double horizontal_field_of_view)
+{
+	viewport->aspect_ratio = image->aspect_ratio;
+	viewport->horizontal_field_of_view = horizontal_field_of_view;
+	viewport->width = 2 * tan(deg_to_rad(horizontal_field_of_view) / 2);
+	viewport->height = viewport->width / viewport->aspect_ratio;
 }
