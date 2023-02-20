@@ -9,7 +9,6 @@ void	init_viewport(\
 		t_viewport *viewport, t_image *image, double horizontal_field_of_view);
 void	init_camera(\
 		t_camera *cam, t_point look_from, t_point look_at, double aperture);
-void	init_focus_plane(\
-		t_focus_plane *focus, t_cam_base *base, \
-		t_viewport *viewport, t_point *origin);
+void	init_focus_plane(t_camera *cam, double focus_distance);
+
 #endif

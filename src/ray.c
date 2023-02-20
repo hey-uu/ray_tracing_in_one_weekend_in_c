@@ -27,7 +27,7 @@ t_color	ray_color(t_ray *ray, t_object_array *world, int depth)
 
 	if (depth <= 0)
 		return (get_color(0, 0, 0));
-	if (object_array_hit(world, ray, &record, T_MINIMUM, INFINITY) == TRUE)
+	if (hit_world(world, ray, &record, T_MINIMUM, INFINITY) == TRUE)
 	{
 		if (scatter(ray, &record, &attenuation, &scattered) == FALSE)
 			return (get_color(0, 0, 0));

@@ -8,7 +8,7 @@
 # include "s_sphere.h"
 
 t_sphere	get_sphere(t_point center, double radius, t_material material);
-t_bool		sphere_hit(\
+t_bool		hit_sphere(\
 			t_sphere *s, t_ray *r, t_hit_record *record, \
 			double t_min, double t_max);
 void		sphere_set_face_normal(\

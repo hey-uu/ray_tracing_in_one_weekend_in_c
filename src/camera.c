@@ -17,17 +17,18 @@ t_ray	get_cam_ray(t_camera *cam, double u, double v)
 	return (get_ray(v_add(cam->origin, offset), dir));
 }
 
-void	init_focus_plane(\
-		t_focus_plane *focus, t_cam_base *base, \
-		t_viewport *viewport, t_point *origin)
+void	init_focus_plane(t_camera *cam, double focus_distance)
 {
-	focus->horizontal = v_mul(base->side, focus->dist * viewport->width);
-	focus->vertical = v_mul(base->up, focus->dist * viewport->height);
-	focus->lower_left_corner = v_subtract(v_subtract(\
-								v_subtract(*origin, \
-								v_div(focus->horizontal, 2)),
-								v_div(focus->vertical, 2)), \
-								v_mul(base->dir, focus->dist));	
+	cam->focus.dist = focus_distance;
+	cam->focus.horizontal = v_mul(\
+						cam->base.side, cam->focus.dist * cam->viewport.width);
+	cam->focus.vertical = v_mul(\
+						cam->base.up, cam->focus.dist * cam->viewport.height);
+	cam->focus.lower_left_corner = v_subtract(v_subtract(v_subtract(\
+									cam->origin, \
+									v_div(cam->focus.horizontal, 2)), \
+									v_div(cam->focus.vertical, 2)), \
+									v_mul(cam->base.dir, cam->focus.dist));	
 }
 
 void	init_camera(\
